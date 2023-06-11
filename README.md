@@ -68,6 +68,7 @@ spec:
 ```
 kubectl apply -f rabbitmq-depl.yaml
 ```
+Or apply it via the Docker Dashboard user interface
 
 ## Launch the user interface in your browser
 
