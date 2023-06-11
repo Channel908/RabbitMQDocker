@@ -64,10 +64,15 @@ spec:
     targetPort: 5672
 
 ```
-```
-kubectl apply -f mssql-persist.yaml
-```
 
 ```
 kubectl apply -f rabbitmq-depl.yaml
 ```
+
+## Launch the user interface in your browser
+
+```
+http://localhost:15672/
+```
+
+
