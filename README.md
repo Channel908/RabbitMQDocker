@@ -68,7 +68,7 @@ spec:
 ```
 kubectl apply -f rabbitmq-depl.yaml
 ```
-Or apply it via the Docker Dashboard user interface
+Or apply it via the Docker Dashboard user interface__
 (see the Docker Dasboard guids https://github.com/Channel908/DockerUI)
 
 ## Launch the user interface in your browser 
@@ -77,7 +77,7 @@ http://localhost:15672/
 ```
 http://localhost:15672/
 ```
-Username: guest
-password: guest
+Username: guest__
+password: guest_-
 
 
