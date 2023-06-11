@@ -77,5 +77,7 @@ http://localhost:15672/
 ```
 http://localhost:15672/
 ```
+Username: guest
+password: guest
 
 
