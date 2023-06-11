@@ -66,7 +66,7 @@ spec:
 ```
 
 ```
-kubectl apply -f rabbitmq-depl.yaml
+kubectl apply -f rabbitmq-deploy.yaml
 ```
 Or apply it via the Docker Dashboard user interface<br />
 (see the Docker Dasboard guids https://github.com/Channel908/DockerUI)
