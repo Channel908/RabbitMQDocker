@@ -1,25 +1,70 @@
-# RabbitMQDocker
+# RabbitMQ Docker Kubernetes Installation
 
-# Sql Kubernetes Installation
-
-## SQL sa password secret
 ```
-kubectl create secret generic mssql --from-literal=SA_PASSWORD=Abc123!!
-```
-## Apply Persistent Volume Claim
+## Apply RabbitMQ Image, Cluster IP and Load balancer
 
 mssql-persist.yaml
 ```
-apiVersion: v1
-kind: PersistentVolumeClaim
+apiVersion: apps/v1
+kind: Deployment
 metadata:
-  name: mssql-claim
+  name: rabbitmq-depl
 spec:
-  accessModes:
-    - ReadWriteMany
-  resources:
-    requests:
-      storage: 200Mi
+  replicas: 1
+  selector:
+    matchLabels:
+      app: rabbitmq
+  template:
+    metadata:
+      labels:
+        app: rabbitmq
+    spec:
+      containers:
+        - name: rabbitmq
+          image: rabbitmq:3-management
+          ports:
+            - containerPort: 15672
+              name: rbmq-mgmt-port
+            - containerPort: 5672
+              name: rbmq-msg-port
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: rabbitmq-clusterip-srv
+spec:
+  type: ClusterIP
+  selector:
+    app: rabbitmq
+  ports:
+  - name: rbmq-mgmt-port
+    protocol: TCP
+    port: 15672
+    targetPort: 15672
+  - name: rbmq-msg-port
+    protocol: TCP
+    port: 5672
+    targetPort: 5672
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: rabbitmq-loadbalancer
+spec:
+  type: LoadBalancer
+  selector:
+    app: rabbitmq
+  ports:
+  - name: rbmq-mgmt-port
+    protocol: TCP
+    port: 15672
+    targetPort: 15672
+  - name: rbmq-msg-port
+    protocol: TCP
+    port: 5672
+    targetPort: 5672
+
+
 ```
 ```
 kubectl apply -f mssql-persist.yaml
